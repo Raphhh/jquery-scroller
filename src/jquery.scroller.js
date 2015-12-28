@@ -3,24 +3,25 @@
  * @author Raphaël Lefebvre <raphael@raphaellefebvre.be>
  * @website https://github.com/Raphhh/jquery-scroller
  */
-(function ( $ ) {
+(function($) {
     "use strict";
 
-    $.fn.scroller = function( options ) {
+    $.fn.scroller = function(options) {
 
         var settings = $.extend({
-                duration: 1500,
-                easing: 'easeInOutExpo'
-            }, options );
+            duration: 1500,
+            easing: 'easeInOutExpo'
+        }, options);
 
         return this.bind('click', function(event) {
-            var $anchor = $(this);
-            $('html, body').stop().animate({
-                scrollTop: $($anchor.attr('href')).offset().top
-            }, settings);
+            var $target = $($(this).attr('href'));
+            var properties = {
+                scrollTop: $target.offset().top
+            };
+
+            $('html, body').stop().animate(properties, settings);
             event.preventDefault();
         });
-
     };
 
-})( jQuery );
+})(jQuery);
